@@ -31,3 +31,10 @@
     overflow-wrap:break-word;
     text-align: justify;
 }
+
+#openHelpButton {
+    position: absolute;
+    top:100%;
+    left:100%;
+    transform: translate(-100%, -100%);
+}

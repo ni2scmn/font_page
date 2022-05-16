@@ -1,6 +1,3 @@
-var output;
-// var input;
-
 // defines the probability of rendering a character in special font
 var special_font_frequency = 0.2;
 
@@ -16,15 +13,28 @@ var special_chars = [
     "ö", "ä", "ü", "Ö", "Ä", "Ü"
 ]
 
-window.onload = function () {
-    output = document.getElementById('main_write');
-    // input = document.getElementById('main_input');
-    // input.onkeydown = logKey;
-    window.onkeydown = logKey;
+var output = document.getElementById('main_write');
+window.onkeydown = logKey;
+
+document.getElementById('openHelpButton').addEventListener('click', updateSpecialCharFreqDisp)
+document.getElementById('specialCharFreqInput').addEventListener('keyup', validateSpecialCharFreqInput);
+
+function validateSpecialCharFreqInput() {
+    const elem = document.getElementById('specialCharFreqInput');
+    var occNonNumeric = elem.value.search(/\D/);
+    if(occNonNumeric > -1 || elem.value > 100 || elem.value < 0) {
+        elem.classList.add('is-invalid');
+        elem.classList.remove('is-valid');
+    } else {
+        elem.classList.remove('is-invalid');
+        elem.classList.add('is-valid');
+        special_font_frequency = elem.value / 100;
+    }
 }
 
-window.onbeforeunload = function () {
-    input.value = '';
+function updateSpecialCharFreqDisp() {
+    document.getElementById('specialCharFreqInput').value = special_font_frequency * 100;
+    validateSpecialCharFreqInput();
 }
 
 function clear_element(elem) {
@@ -32,9 +42,12 @@ function clear_element(elem) {
 }
 
 function logKey(event) {
-    console.log(event);
-
     key = event.keyCode;
+
+    // do not process keys if help modal is open
+    if(document.getElementById('helpModal').classList.contains('show')) {
+        return;
+    }
 
     if (event.key == "ü" &&
         (event.ctrlKey | event.metaKey)) {
