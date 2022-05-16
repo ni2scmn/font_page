@@ -1,0 +1,32 @@
+@font-face {
+    font-family: crazyyy;
+    src: url('earwig factory rg.ttf');
+}
+
+.special-font {
+    font-family: crazyyy
+}
+
+.normal-font {
+    font-family: Arial, Helvetica, sans-serif
+}
+
+
+#main_input {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+
+#main_write {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    overflow-wrap: break-word;
+    max-width: 80%;
+    margin: 0 auto;
+}
