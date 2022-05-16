@@ -15,18 +15,18 @@ var special_chars = [
 
 $(document).ready(function() {
     $(document).keydown(handleKeyDown);
-    $('#openHelpButton').click(updateSpecialCharFreqDisp)
-    $('#specialCharFreqInput').keyup(validateSpecialCharFreqInput)
-    $('#specialFontInput').change(changeSelectedSpecialFont)
+    $('#open-help-button').click(updateSpecialCharFreqDisp)
+    $('#special-char-freq-input').keyup(validateSpecialCharFreqInput)
+    $('#special-font-input').change(changeSelectedSpecialFont)
 
 })
 
 function getSelectedFont() {
-    return $('#specialFontInput').val();
+    return $('#special-font-input').val();
 }
 
 function validateSpecialCharFreqInput() {
-    var elem = $('#specialCharFreqInput');
+    var elem = $('#special-char-freq-input');
     var occNonNumeric = elem.val().search(/\D/);
     if (occNonNumeric > -1 || elem.val() > 100 || elem.val() < 0) {
         elem.addClass('is-invalid');
@@ -40,14 +40,14 @@ function validateSpecialCharFreqInput() {
 
 // // TODO fix maximum scroll top
 function updateScroll() {
-    $('#main_write').stop().animate({
+    $('#main-write').stop().animate({
         'scrollTop': '100000000px'
     }, 'fast', 'swing');
 }
 
 function updateSpecialCharFreqDisp() {
-    $('#specialCharFreqInput').val(special_font_frequency * 100)
-    validateSpecialCharFreqInput();
+    $('#special-char-freq-input').val(special_font_frequency * 100)
+    validatespecial-char-freq-input();
 }
 
 function changeSelectedSpecialFont() {
@@ -68,7 +68,7 @@ function writeToOutput(event) {
     } else {
         newSpan.addClass('normal-font');
     }
-    $('#main_write').append(newSpan);
+    $('#main-write').append(newSpan);
 }
 
 function handleKeyDown(event_jq) {
@@ -78,7 +78,7 @@ function handleKeyDown(event_jq) {
     updateScroll();
 
     // do not process keys if help modal is open
-    if ($('#helpModal').hasClass('show')) {
+    if ($('#help-modal').hasClass('show')) {
         return;
     }
 
@@ -99,14 +99,14 @@ function handleKeyDown(event_jq) {
     } else if (event.key == "ü" &&
         (event.ctrlKey | event.metaKey)) {
         // reset output
-        $('#main_write').clear();
+        $('#main-write').clear();
 
     } else if (key == 8) {
         // handle backspace
         // remove last element
-        $('#main_write').children().last().remove();
+        $('#main-write').children().last().remove();
     } else if (key == 13) {
-        $('#main_write').append($('<br>'))
+        $('#main-write').append($('<br>'))
     } else if ((key < 48 | key > 90) &
         !special_keys.includes(key) &
         !special_chars.includes(event.key)) {

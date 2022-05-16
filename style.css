@@ -22,7 +22,7 @@
     width: 100vw;
 }
 
-#main_write {
+#main-write {
     font-size: x-large;
     position: relative;
     top: 50%;
@@ -35,38 +35,24 @@
     text-align: center;
 }
 
-#openHelpButton {
+#open-help-button {
     position: absolute;
     top: 100%;
     left: 100%;
     transform: translate(-100%, -100%);
 }
 
-#specialFontInput {
+#special-font-input {
     font-family: font1;
 }
 
-/* * { border: 1px solid black; } */
-
-/* html::after {
-    content:"";
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    border:1px solid red;
-    pointer-events:none;
-  } */
-
-
-   /* Hide scrollbar for Chrome, Safari and Opera */
-#main_write::-webkit-scrollbar {
+/* Hide scrollbar for Chrome, Safari and Opera */
+#main-write::-webkit-scrollbar {
     display: none;
   }
   
   /* Hide scrollbar for IE, Edge and Firefox */
-#main_write {
+#main-write {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   } 
