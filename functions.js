@@ -99,7 +99,7 @@ function handleKeyDown(event_jq) {
     } else if (event.key == "ü" &&
         (event.ctrlKey | event.metaKey)) {
         // reset output
-        $('#main-write').clear();
+        $('#main-write').empty();
 
     } else if (key == 8) {
         // handle backspace
