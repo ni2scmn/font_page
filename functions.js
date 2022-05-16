@@ -18,6 +18,9 @@ window.onkeydown = logKey;
 
 document.getElementById('openHelpButton').addEventListener('click', updateSpecialCharFreqDisp)
 document.getElementById('specialCharFreqInput').addEventListener('keyup', validateSpecialCharFreqInput);
+document.getElementById('specialFontInput').addEventListener('change', changeSelectedSpecialFont);
+
+var selectedFont = document.getElementById('specialFontInput').value;
 
 function validateSpecialCharFreqInput() {
     const elem = document.getElementById('specialCharFreqInput');
@@ -35,6 +38,14 @@ function validateSpecialCharFreqInput() {
 function updateSpecialCharFreqDisp() {
     document.getElementById('specialCharFreqInput').value = special_font_frequency * 100;
     validateSpecialCharFreqInput();
+}
+
+function changeSelectedSpecialFont() {
+    selectedFont = document.getElementById('specialFontInput').value;
+    var es = document.getElementsByClassName('special-font');
+    for(i = 0; i < es.length; i++) {
+        es[i].style.fontFamily = selectedFont;
+    }
 }
 
 function clear_element(elem) {
@@ -76,6 +87,7 @@ function logKey(event) {
         spanElem.textContent = event.key;
         if (rnd <= special_font_frequency) {
             spanElem.className = 'special-font';
+            spanElem.style.fontFamily = selectedFont;
         } else {
             spanElem.className = 'normal-font';
         }

@@ -1,10 +1,11 @@
 @font-face {
-    font-family: crazyyy;
+    font-family: font1;
     src: url('earwig factory rg.ttf');
 }
 
-.special-font {
-    font-family: crazyyy
+@font-face {
+    font-family: font2;
+    src: url('1980 portable.otf');
 }
 
 .normal-font {

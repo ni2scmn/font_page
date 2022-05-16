@@ -31,14 +31,20 @@
                 <div class="modal-body">
                     This is Fancy Writer! <br>
                     ... <br>
-                    Crtl + ü clears the output <br>
-                    Special Character Frequency:
+                    Crtl + ü clears the output <br> <br>
+                    <h3>Settings</h3>
+                    Special character Frequency:
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" aria-label="" id="specialCharFreqInput">
                         <div class="input-group-append">
                             <span class="input-group-text">%</span>
                         </div>
                     </div>
+                    Selected Special Font:
+                    <select class="form-select" id="specialFontInput">
+                        <option value="font1">Font 1</option>
+                        <option value="font2">Font 2</option>
+                    </select>
 
                 </div>
                 <div class="modal-footer">
@@ -48,10 +54,12 @@
         </div>
     </div>
 
-    <script src="functions.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="functions.js"></script>
 </body>
 
 </html>
