@@ -1,13 +1,11 @@
 // defines the probability of rendering a character in special font
 var special_font_frequency = 0.2;
-
 // var print_prepared = false;
 
 var special_keys = [
     8, // backspace
     32 // space
 ]
-
 var special_chars = [
     ",", ";", ".", ":", "-", "_",
     "<", ">", "^", "°", "´", "`",
@@ -15,74 +13,72 @@ var special_chars = [
     "ö", "ä", "ü", "Ö", "Ä", "Ü"
 ]
 
-var output = document.getElementById('main_write');
+$(document).ready(function() {
+    $(document).keydown(handleKeyDown);
+    $('#openHelpButton').click(updateSpecialCharFreqDisp)
+    $('#specialCharFreqInput').keyup(validateSpecialCharFreqInput)
+    $('#specialFontInput').change(changeSelectedSpecialFont)
 
-window.onkeydown = handleKeyDown;
-document.getElementById('openHelpButton').addEventListener('click', updateSpecialCharFreqDisp)
-document.getElementById('specialCharFreqInput').addEventListener('keyup', validateSpecialCharFreqInput);
-document.getElementById('specialFontInput').addEventListener('change', changeSelectedSpecialFont);
+})
 
-var selectedFont = document.getElementById('specialFontInput').value;
+function getSelectedFont() {
+    return $('#specialFontInput').val();
+}
 
 function validateSpecialCharFreqInput() {
-    const elem = document.getElementById('specialCharFreqInput');
-    var occNonNumeric = elem.value.search(/\D/);
-    if (occNonNumeric > -1 || elem.value > 100 || elem.value < 0) {
-        elem.classList.add('is-invalid');
-        elem.classList.remove('is-valid');
+    var elem = $('#specialCharFreqInput');
+    var occNonNumeric = elem.val().search(/\D/);
+    if (occNonNumeric > -1 || elem.val() > 100 || elem.val() < 0) {
+        elem.addClass('is-invalid');
+        elem.removeClass('is-valid');
     } else {
-        elem.classList.remove('is-invalid');
-        elem.classList.add('is-valid');
-        special_font_frequency = elem.value / 100;
+        elem.removeClass('is-invalid');
+        elem.addClass('is-valid');
+        special_font_frequency = elem.val() / 100;
     }
 }
 
-// TODO fix maximum scroll top
+// // TODO fix maximum scroll top
 function updateScroll() {
-    var element = document.getElementById("main_write");
     $('#main_write').stop().animate({
         'scrollTop': '100000000px'
     }, 'fast', 'swing');
 }
 
 function updateSpecialCharFreqDisp() {
-    document.getElementById('specialCharFreqInput').value = special_font_frequency * 100;
+    $('#specialCharFreqInput').val(special_font_frequency * 100)
     validateSpecialCharFreqInput();
 }
 
 function changeSelectedSpecialFont() {
-    selectedFont = document.getElementById('specialFontInput').value;
-    document.getElementById('specialFontInput').style.fontFamily = selectedFont;
-    var es = document.getElementsByClassName('special-font');
-    for (i = 0; i < es.length; i++) {
-        es[i].style.fontFamily = selectedFont;
-    }
-}
-
-function clear_element(elem) {
-    elem.innerHTML = '';
+    var selectedFont = getSelectedFont();
+    $('#specialFontInput').css('font-family', selectedFont);
+    $('.special-font').css('font-family', selectedFont);
 }
 
 function writeToOutput(event) {
+    var selectedFont = getSelectedFont();
     var rnd = Math.random();
-    var spanElem = document.createElement('span');
-    spanElem.textContent = event.key;
+    var newSpan = $('<span></span>')
+    .text(event.key)
+
     if (rnd <= special_font_frequency) {
-        spanElem.className = 'special-font';
-        spanElem.style.fontFamily = selectedFont;
+        newSpan.addClass('special-font');
+        newSpan.css('font-family', selectedFont);
     } else {
-        spanElem.className = 'normal-font';
+        newSpan.addClass('normal-font');
     }
-    output.appendChild(spanElem);
+    $('#main_write').append(newSpan);
 }
 
-function handleKeyDown(event) {
-    key = event.keyCode;
+function handleKeyDown(event_jq) {
+    var key = event_jq.which;
+    var event = event_jq.originalEvent;
 
     updateScroll();
 
     // do not process keys if help modal is open
-    if (document.getElementById('helpModal').classList.contains('show')) {
+    if ($('#helpModal').hasClass('show')) {
         return;
     }
 
@@ -103,18 +99,14 @@ function handleKeyDown(event) {
     } else if (event.key == "ü" &&
         (event.ctrlKey | event.metaKey)) {
         // reset output
-        clear_element(output);
+        $('#main_write').clear();
 
     } else if (key == 8) {
         // handle backspace
         // remove last element
-        output.removeChild(
-            output.childNodes[output.childNodes.length - 1]
-        );
+        $('#main_write').children().last().remove();
     } else if (key == 13) {
-        output.appendChild(
-            document.createElement('br')
-        );
+        $('#main_write').append($('<br>'))
     } else if ((key < 48 | key > 90) &
         !special_keys.includes(key) &
         !special_chars.includes(event.key)) {
