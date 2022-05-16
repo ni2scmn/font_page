@@ -23,8 +23,12 @@ window.onload = function () {
     window.onkeydown = logKey;
 }
 
-window.onbeforeunload = function() {
+window.onbeforeunload = function () {
     input.value = '';
+}
+
+function clear_element(elem) {
+    elem.innerHTML = '';
 }
 
 function logKey(event) {
@@ -32,32 +36,36 @@ function logKey(event) {
 
     key = event.keyCode;
 
-    if (key == 8) {
+    if (event.key == "ü" &&
+        (event.ctrlKey | event.metaKey)) {
+        // reset output
+        clear_element(output);
+
+    } else if (key == 8) {
         // handle backspace
+        // remove last element
         output.removeChild(
-            output.childNodes[output.childNodes.length-1]
+            output.childNodes[output.childNodes.length - 1]
         );
-        return;
-    } else if (event.key == "ü" && 
-                (event.ctrlKey | event.metaKey)) {
-        output.innerHTML = '';
-        return;
+    } else if (key == 13) {
+        output.appendChild(
+            document.createElement('br')
+        );
     } else if ((key < 48 | key > 90) &
-        !special_keys.includes(key) & 
+        !special_keys.includes(key) &
         !special_chars.includes(event.key)) {
-            // non characters?
-        return;
-    }
-
-    var rnd = Math.random();
-
-    var spanElem = document.createElement('span');
-    spanElem.textContent = event.key;
-    if (rnd <= special_font_frequency) {
-        spanElem.className = 'special-font';
+        // non characters?
+        // do nothing
     } else {
-        spanElem.className = 'normal-font';
-    }
-    output.appendChild(spanElem);
+        var rnd = Math.random();
 
+        var spanElem = document.createElement('span');
+        spanElem.textContent = event.key;
+        if (rnd <= special_font_frequency) {
+            spanElem.className = 'special-font';
+        } else {
+            spanElem.className = 'normal-font';
+        }
+        output.appendChild(spanElem);
+    }
 }
