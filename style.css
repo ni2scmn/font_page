@@ -1,11 +1,11 @@
 @font-face {
     font-family: font1;
-    src: url('earwig factory rg.ttf');
+    src: url('res/earwig factory rg.ttf');
 }
 
 @font-face {
     font-family: font2;
-    src: url('1980 portable.otf');
+    src: url('res/1980 portable.otf');
 }
 
 .normal-font {
@@ -29,13 +29,21 @@
     transform: translate(-50%, -50%);
     max-width: 50%;
     overflow: hidden;
-    overflow-wrap:break-word;
+    overflow-wrap: break-word;
     text-align: justify;
 }
 
 #openHelpButton {
     position: absolute;
-    top:100%;
-    left:100%;
+    top: 100%;
+    left: 100%;
     transform: translate(-100%, -100%);
+}
+
+#specialFontInput {
+    font-family: font1;
+}
+
+#font1Option {
+    font-family: font2;
 }
