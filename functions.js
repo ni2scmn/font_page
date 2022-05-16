@@ -1,7 +1,7 @@
 // defines the probability of rendering a character in special font
 var special_font_frequency = 0.2;
 
-var print_prepared = false;
+// var print_prepared = false;
 
 var special_keys = [
     8, // backspace
@@ -35,6 +35,14 @@ function validateSpecialCharFreqInput() {
         elem.classList.add('is-valid');
         special_font_frequency = elem.value / 100;
     }
+}
+
+// TODO fix maximum scroll top
+function updateScroll() {
+    var element = document.getElementById("main_write");
+    $('#main_write').stop().animate({
+        'scrollTop': '100000000px'
+    }, 'fast', 'swing');
 }
 
 function updateSpecialCharFreqDisp() {
@@ -71,6 +79,8 @@ function writeToOutput(event) {
 function handleKeyDown(event) {
     key = event.keyCode;
 
+    updateScroll();
+
     // do not process keys if help modal is open
     if (document.getElementById('helpModal').classList.contains('show')) {
         return;
@@ -78,17 +88,18 @@ function handleKeyDown(event) {
 
     if (event.key == "ä" &&
         (event.ctrlKey | event.metaKey)) {
-        if (!print_prepared) {
-            document.getElementById('openHelpButton').style.display = 'none';
-            output.style.top = 'auto';
-            output.style.transform = 'translate(-50%, 10%)';
-            print_prepared = true;
-        } else {
-            document.getElementById('openHelpButton').style.display = null;
-            output.style.top = null;
-            output.style.transform = null;
-            print_prepared = false;
-        }
+            // TODO disabled until fixed
+        // if (!print_prepared) {
+        //     document.getElementById('openHelpButton').style.display = 'none';
+        //     output.style.top = 'auto';
+        //     output.style.transform = 'translate(-50%, 10%)';
+        //     print_prepared = true;
+        // } else {
+        //     document.getElementById('openHelpButton').style.display = null;
+        //     output.style.top = null;
+        //     output.style.transform = null;
+        //     print_prepared = false;
+        // }
     } else if (event.key == "ü" &&
         (event.ctrlKey | event.metaKey)) {
         // reset output
