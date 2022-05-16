@@ -47,7 +47,7 @@ function updateScroll() {
 
 function updateSpecialCharFreqDisp() {
     $('#special-char-freq-input').val(special_font_frequency * 100)
-    validatespecial-char-freq-input();
+    validateSpecialCharFreqInput();
 }
 
 function changeSelectedSpecialFont() {
