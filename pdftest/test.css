@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .child:first-child {
+    padding-bottom: 10px;
+  }

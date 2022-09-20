@@ -1,0 +1,2 @@
+Redirect /foobar/ https://example.com
+ErrorDocument 404 /not-found.html

@@ -15,10 +15,15 @@ var special_chars = [
 
 $(document).ready(function() {
     $(document).keydown(handleKeyDown);
+    $(document).keydown(handleKeyUp);
+    $(document).keypress(handleKeyPress);
     $('#open-help-button').click(updateSpecialCharFreqDisp)
     $('#special-char-freq-input').keyup(validateSpecialCharFreqInput)
     $('#special-font-input').change(changeSelectedSpecialFont)
 
+    var elem = document.getElementById('hidden-input');
+    elem.focus();
+    elem.click();
 })
 
 function getSelectedFont() {
@@ -71,9 +76,22 @@ function writeToOutput(event) {
     $('#main-write').append(newSpan);
 }
 
+function handleKeyUp(event_jq) {
+    console.log('kUp')
+    console.log(event_jq);
+}
+
+function handleKeyPress(event_jq) {
+    console.log('kPress')
+    console.log(event_jq);
+}
+
 function handleKeyDown(event_jq) {
     var key = event_jq.which;
     var event = event_jq.originalEvent;
+
+    console.log('kDown')
+    console.log(event_jq);
 
     updateScroll();
 
